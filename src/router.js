@@ -6,15 +6,21 @@ Vue.use(Router)
 export default new Router({
   routes: [
     //一级路由
+
     {
-      path: '/',
-      name: 'login',
-      component: () => import('./views/register/AdministrativeRegistration')
+      path: '/User',
+      name: 'User',
+      component: () => import('./views/register/User.vue')
     },
     {
-      path: '/index',
-      name: 'index',
-      component: () => import('./views/register/UserRegistration.vue')
+      path: '/Administrative',
+      name: 'Administrative',
+      component: () => import('./views/register/Administrative')
+    },
+    {
+      path: '/approval',
+      name: 'approval',
+      component: () => import('./views/approval/approval.vue')
     },
     {
       path: '/rule',
@@ -25,6 +31,12 @@ export default new Router({
       path: '/file',
       name: 'file',
       component: () => import('./views/register/eeAfiles.vue')
+    },
+    {
+      path: '/',
+      name: 'login',
+      component: () => import('./views/login/login.vue'),
+      children: []
     }
   ]
 })

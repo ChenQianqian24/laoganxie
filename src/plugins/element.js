@@ -16,7 +16,11 @@ import {
   RadioGroup,
   Cascader,
   Icon,
-  Upload
+  Upload,
+  Table,
+  TableColumn,
+  MessageBox,
+  Message
 } from 'element-ui'
 
 Vue.use(Button)
@@ -36,3 +40,9 @@ Vue.use(RadioGroup)
 Vue.use(Cascader)
 Vue.use(Icon)
 Vue.use(Upload)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Switch)
+
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$message = Message

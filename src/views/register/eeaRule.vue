@@ -105,11 +105,11 @@ export default {
      * 如果value值相同，alert并清空当前value
      */
     handleChange(item) {
-
       this.currentValue.push(item.value)
       this.currentValue = this.new()
-
+      window.console.log(item)
     },
+
     new() {
       let obj = {}
       return this.currentValue.filter((item) => {
@@ -118,7 +118,13 @@ export default {
         return obj.hasOwnProperty(newItem) ? false : obj[newItem] = true
       })
     },
+
     submit() {
+      //this.EEARule这个二维数组内部的两个数组的第一项应为此用户的部门和权限
+      //arr1第一项为用户部门  arr2第一项为用户权限
+      this.arr1.push(sessionStorage.getItem('SectionID'))
+      this.arr2.push(sessionStorage.getItem('authority'))
+
       for (var i = 0; i < this.currentValue.length; i++) {
         this.arr1.push(this.currentValue[i][0])
         this.arr2.push(this.currentValue[i][1])
@@ -129,16 +135,20 @@ export default {
       this.eeaRule = {
         'eeaRule.EEAdescription': this.textarea,
         'eeaRule.EEARule': this.EEARule,
-        'eeaRule.lastModifyTime': date()
+        'eeaRule.lastModifyTime': date(),
+        'eeaRule.nextSectionID': this.EEARule[0][0],
+        'eeaRule.nextAuthority': this.EEARule[1][0],
+        'userID': ''  //登录后可获取
       }
-      window.console.log(this.eeaRule['eeaRule.EEARule'])
-      this.$axios.post('/robot/register', this.eeaRule)
-        .then(res => {
-          window.console.log(res)
-        })
-        .catch(err => {
-          window.console.log(err)
-        })
+
+      window.console.log(this.eeaRule)
+      //   this.$axios.post('/robot/register', this.eeaRule)
+      //     .then(res => {
+      //       window.console.log(res)
+      //     })
+      //     .catch(err => {
+      //       window.console.log(err)
+      //     })
     },
     removeSelect(item) {
       var index = this.dynamicRule.indexOf(item)
